@@ -5,6 +5,8 @@ to_do_list = []
 
 @app.route('/', methods=['GET', 'POST'])
 def view_to_do_list():
+    error = None  # Define the error variable initially
+
     if request.method == 'POST':
         if request.form['action'] == 'clear':
             to_do_list.clear()
@@ -23,9 +25,7 @@ def view_to_do_list():
                 to_do_list.append((task, email, priority))
                 return redirect('/')
 
-            return render_template('todo_list.html', to_do_list=to_do_list, error=error)
-
-    return render_template('todo_list.html', to_do_list=to_do_list)
+    return render_template('todo_list.html', to_do_list=to_do_list, error=error)
 
 if __name__ == '__main__':
     app.run()
